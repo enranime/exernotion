@@ -17,7 +17,7 @@ const Navbar = () => {
                 <div className="navbar-nav pe-3">
 
                     <Link 
-                        to='/'
+                        to=''
                         className="nav-link text-light fw-bold p-navtext" >
                         Add your Activity
                     </Link>

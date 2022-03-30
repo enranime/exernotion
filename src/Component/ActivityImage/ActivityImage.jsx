@@ -1,6 +1,7 @@
 import './ActivityImage.css'
 
 const ActivityImage = () => {
+        
     return (
         <div className="container-fluid d-none d-md-block">
         <div className="row row-cols-4 row-cols-lg-6 px-3 py-3">

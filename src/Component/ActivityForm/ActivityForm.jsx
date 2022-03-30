@@ -7,6 +7,7 @@ const ActivityForm = () => {
     const [activityName, setActivityName] = useState('');
     const [activityDescription, setActivityDescription] =  useState('');
 
+
     const onChangeActivityName = (e) => {
         const newValue = e.target.value;
         if(newValue.length > 10){
@@ -14,6 +15,12 @@ const ActivityForm = () => {
         }else{
         setActivityName(newValue);
         }
+    };
+
+    const onChangeActivityDescription = (e) => {
+        const newValue = e.target.value;
+        setActivityDescription(newValue);
+     
     };
 
 
@@ -71,7 +78,15 @@ const ActivityForm = () => {
                                 </div>
                                 <div className="mt-5 mb-4">
                                     <label htmlFor="form-desc" className="form-label mb-3 fw-bold">Describe this journal</label>
-                                    <textarea maxLength={120} type="text" className="form-control" id="form-desc" rows="3" placeholder="Max 120 Characters"></textarea>
+                                    <textarea maxLength={120} 
+                                    type="text" 
+                                    className="form-control" 
+                                    id="form-desc" 
+                                    placeholder="Max 120 Characters"
+                                    value={activityDescription}
+                                    onChange={onChangeActivityDescription}
+                                    ></textarea>
+
                                 </div>
                                 <div className="add-activity-btn">
                                     <button type="submit" className="btn btn-dark fw-bold py-2 border" >ADD ACTIVITY</button>
