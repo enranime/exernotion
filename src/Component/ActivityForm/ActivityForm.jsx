@@ -1,28 +1,16 @@
-import React,{ useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 
 import './ActivityForm.css'
 import ActivityImage from "../ActivityImage/ActivityImage";
 
 const ActivityForm = () => {
-    const [activityName, setActivityName] = useState('');
-    const [activityDescription, setActivityDescription] =  useState('');
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const onSubmitData = data => console.log(data);
 
-
-    const onChangeActivityName = (e) => {
-        const newValue = e.target.value;
-        if(newValue.length > 10){
-            return;
-        }else{
-        setActivityName(newValue);
-        }
-    };
-
-    const onChangeActivityDescription = (e) => {
-        const newValue = e.target.value;
-        setActivityDescription(newValue);
-     
-    };
-
+    const LabelName =({id,name}) => {
+        return( <label htmlFor={id} className="form-label mb-3 fw-bold">{name}</label>)
+    }
 
     return (
         <section id="p-addactivity" className="p-activity">
@@ -32,28 +20,25 @@ const ActivityForm = () => {
             <div className="container my-5">
                 <div className="row">
                     <div className="col-md-6 py-3 pe-5">
-                        {/* form section */}
-                        <form>
-                            <div className="mb-4">
-                                <label htmlFor="form-activity" className="form-label mb-3 fw-bold">Activity Name</label>
 
+                        {/* form section */}
+                        <form onSubmit={handleSubmit(onSubmitData)}>
+                            <div className="mb-4">
+                                <LabelName id="form-activity"  name="Activity Name"/>
                                 <input 
                                 type="text" 
                                 className="form-control" 
                                 id="form-activity" 
                                 placeholder="Your Activity Name"
-                                value={activityName}
-                                onChange={onChangeActivityName}
                                  required/>
 
                             </div>
                             <div className="mb-4">
-                                <label htmlFor="form-date" className="form-label mb-3 fw-bold">Date</label>
+                                <LabelName id="form-date" name="Date"/>
                                 <input type="date" className="form-control" id="form-date" required/>
                             </div>
                             <div className="mb-4">
-                                <label htmlFor="activity-type" className="form-label mb-3 fw-bold">Activity Type</label>
-
+                                <LabelName id="activity-type" name="Activity Type"/>
                                 <select className="form-select" id="activity-type" required>
                                     <option value="" className="d-none">Choose Your Activity</option>
                                     <option value="1">running</option>
@@ -73,18 +58,16 @@ const ActivityForm = () => {
 
                                 </div>
                                 <div className="mb-4">
-                                    <label htmlFor="form-duration" className="form-label mb-3 fw-bold">Activity Duration</label>
+                                    <LabelName id="form-duration" name="Activity Duration"/>
                                     <input type="number" className="form-control" id="form-duration" placeholder="Hours" required/>
                                 </div>
                                 <div className="mt-5 mb-4">
-                                    <label htmlFor="form-desc" className="form-label mb-3 fw-bold">Describe this journal</label>
-                                    <textarea maxLength={120} 
+                                    <LabelName id="form-desc" name="Describe this journal"/>
+                                    <textarea maxLength={120}
                                     type="text" 
                                     className="form-control" 
                                     id="form-desc" 
                                     placeholder="Max 120 Characters"
-                                    value={activityDescription}
-                                    onChange={onChangeActivityDescription}
                                     ></textarea>
 
                                 </div>
@@ -96,11 +79,12 @@ const ActivityForm = () => {
                         <div className="col-md-6 d-flex align-items-center justify-content-center">
                             <img  className ="img-form img-fluid d-none d-md-block img-fluid" src="./image/icon-sport/running (1).png" width="520px"  alt="placeholder"/>
                         </div>
+                        {/* end form section */}
                     </div>
-                    {/* end form section */}
+                    
                 </div>
 
-</section>
+        </section>
     );   
 };
 
