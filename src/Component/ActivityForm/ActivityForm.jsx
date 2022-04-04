@@ -1,16 +1,19 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import ImageGallery from "../../assets/images/imageIndex";
 
 import './ActivityForm.css'
 import ActivityImage from "../ActivityImage/ActivityImage";
 
+
 const ActivityForm = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmitData = data => console.log(data);
+    const onSubmitData = data => alert(JSON.stringify(data));
 
     const LabelName =({id,name}) => {
         return( <label htmlFor={id} className="form-label mb-3 fw-bold">{name}</label>)
     }
+
 
     return (
         <section id="p-addactivity" className="p-activity">
@@ -77,7 +80,7 @@ const ActivityForm = () => {
                             </form>
                         </div>
                         <div className="col-md-6 d-flex align-items-center justify-content-center">
-                            <img  className ="img-form img-fluid d-none d-md-block img-fluid" src="./image/icon-sport/running (1).png" width="520px"  alt="placeholder"/>
+                            <img  className ="img-form img-fluid d-none d-md-block img-fluid" src={ImageGallery.running} width="520px"  alt="placeholder"/>
                         </div>
                         {/* end form section */}
                     </div>
