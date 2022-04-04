@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{ useState } from "react";
 import { useForm } from "react-hook-form";
 import ImageGallery from "../../assets/images/imageIndex";
 
@@ -28,13 +28,17 @@ const ActivityForm = () => {
                         <form onSubmit={handleSubmit(onSubmitData)}>
                             <div className="mb-4">
                                 <LabelName id="form-activity"  name="Activity Name"/>
-                                <input 
-                                type="text" 
+                                <input {...register("ActivityName", {
+                                    required: {value:true, message: "This field is required"},
+                                    maxLength:{value:10, message: "Activity Name cannot exceed 10 characters" },
+                                    minLength:{value:3, message: "Activity Name cannot below 3 characters" },
+                                    pattern:{value:/^[a-zA-Z]+$/i ,message: "Activity Name cannot be number"}
+                                })}
                                 className="form-control" 
                                 id="form-activity" 
                                 placeholder="Your Activity Name"
-                                 required/>
-
+                                />
+                               {errors?.ActivityName?.message}
                             </div>
                             <div className="mb-4">
                                 <LabelName id="form-date" name="Date"/>
@@ -92,4 +96,6 @@ const ActivityForm = () => {
 };
 
 
-export default ActivityForm;
+
+
+ export default ActivityForm;
