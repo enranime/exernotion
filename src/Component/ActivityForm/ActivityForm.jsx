@@ -7,7 +7,7 @@ import ActivityImage from "../ActivityImage/ActivityImage";
 
 
 const ActivityForm = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm( {mode:'onChange'});
     const onSubmitData = data => alert(JSON.stringify(data));
 
     const LabelName =({id,name}) => {
@@ -23,23 +23,23 @@ const ActivityForm = () => {
             <div className="container my-5">
                 <div className="row">
                     <div className="col-md-6 py-3 pe-5">
-
                         {/* form section */}
                         <form onSubmit={handleSubmit(onSubmitData)}>
                             <div className="mb-4">
                                 <LabelName id="form-activity"  name="Activity Name"/>
                                 <input {...register("ActivityName", {
-                                    required: {value:true, message: "This field is required"},
-                                    maxLength:{value:10, message: "Activity Name cannot exceed 10 characters" },
-                                    minLength:{value:3, message: "Activity Name cannot below 3 characters" },
+                                    required: {value:true, message: "this field is required"},
+                                    maxLength:{value: 10, message: "Activity Name cannot exceed 10 characters"},
+                                    minLength:{value:3, message: "Activity Name cannot below 3 characters"},
                                     pattern:{value:/^[a-zA-Z]+$/i ,message: "Activity Name cannot be number"}
                                 })}
                                 className="form-control" 
                                 id="form-activity" 
                                 placeholder="Your Activity Name"
                                 />
-                               {errors?.ActivityName?.message}
+                                {errors?.ActivityName?.message && <p>{errors?.ActivityName?.message}</p>}
                             </div>
+
                             <div className="mb-4">
                                 <LabelName id="form-date" name="Date"/>
                                 <input type="date" className="form-control" id="form-date" required/>

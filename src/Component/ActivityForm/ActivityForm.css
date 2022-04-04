@@ -1,4 +1,14 @@
 
+p {
+  color: #bf1650;
+}
+
+
+p::before {
+  display: inline;
+  content: "⚠ ";
+}
+
 .subheader{
   display:flex;
   justify-content: space-between;
