@@ -1,23 +1,79 @@
-import React ,{ useState } from "react";
+import React,{useState} from "react";
 import { useForm } from "react-hook-form";
 import ImageGallery from "../../assets/images/imageIndex";
-
+import { joiResolver } from '@hookform/resolvers/joi';
+import Joi from 'joi';
 import './ActivityForm.css'
 import ActivityImage from "../ActivityImage/ActivityImage";
+import Select from 'react-select'
+import chroma from 'chroma-js';
+
+
+
 
 
 const ActivityForm = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm( {mode:'onChange'});
-    const onSubmitData = data => alert(JSON.stringify(data));
+    
+    // submit data
+    const onSubmitData = (data) => alert(JSON.stringify(data));
 
-    const LabelName =({id,name}) => {
-        return( <label htmlFor={id} className="form-label mb-3 fw-bold">{name}</label>)
+    // schema
+    const ActivitySchema = Joi.object({
+        activityName: Joi.string().max(10).min(3).required(),
+        description: Joi.string().required(),
+        activityDate: Joi.date().required(),
+       
+    });
+    
+
+    // selected intial state
+    const [selectedOption, setSelectedOption] = useState("Choose Activity");
+    const handleTypeSelect = (e) => {setSelectedOption(e.value)};
+
+    // selected option
+    const options = [
+        { value:'running' , label:'Running', color: '#06c258'},
+        { value:'swimming' , label:'Swimming', color: '#06c258'},
+        { value:'basketball' , label:'Basketball', color: '#06c258'},
+        { value:'biking' , label:'Biking', color: '#06c258'},
+        { value:'weight_training' , label:'Weight training', color: '#06c258'},
+        { value:'pingpong' , label:'Ping Pong', color: '#06c258'},
+        { value:'boxing' , label:'Boxing', color: '#06c258'},
+        { value:'tennis' , label:'Tennis', color: '#06c258'},
+        { value:'yoga' , label:'Yoga', color: '#06c258'},
+        { value:'soccer' , label:'Soccer', color: '#06c258'},
+        { value:'golf' , label:'Golf', color: '#06c258'},
+        { value:'other' , label:'Other', color: '#06c258'}
+    ]
+    // select style
+
+    const colourStyles = {
+        control: (styles) => ({ ...styles, backgroundColor: 'white' }),
+        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+          const color = chroma(data.color);
+          return {
+            ...styles,
+            backgroundColor: isDisabled? undefined: isSelected? data.color: isFocused? color.alpha(0.1).css(): undefined,
+            color: isDisabled? '#ccc': isSelected? chroma.contrast(color, 'white') > 2? 'white': 'black': data.color,
+          };
+        },
+    };
+
+    // react hook form
+
+     const { register, handleSubmit,formState: { errors } } = useForm( {mode:'onChange',resolver: joiResolver(ActivitySchema)});
+
+
+    // Label component 
+    const LabelName =({name}) => {
+        return( <label className="form-label mb-3 fw-bold">{name}</label>)
     }
-
+    // Input component
 
     return (
-        <section id="p-addactivity" className="p-activity">
 
+        
+        <section id="p-addactivity" className="p-activity">
             <h2>Add your Activity</h2>
             <ActivityImage/>
             <div className="container my-5">
@@ -27,42 +83,25 @@ const ActivityForm = () => {
                         <form onSubmit={handleSubmit(onSubmitData)}>
                             <div className="mb-4">
                                 <LabelName id="form-activity"  name="Activity Name"/>
-                                <input {...register("ActivityName", {
-                                    required: {value:true, message: "this field is required"},
-                                    maxLength:{value: 10, message: "Activity Name cannot exceed 10 characters"},
-                                    minLength:{value:3, message: "Activity Name cannot below 3 characters"},
-                                    pattern:{value:/^[a-zA-Z]+$/i ,message: "Activity Name cannot be number"}
-                                })}
-                                className="form-control" 
-                                id="form-activity" 
-                                placeholder="Your Activity Name"
-                                />
-                                {errors?.ActivityName?.message && <p>{errors?.ActivityName?.message}</p>}
-                            </div>
-
-                            <div className="mb-4">
-                                <LabelName id="form-date" name="Date"/>
-                                <input type="date" className="form-control" id="form-date" required/>
+                                <input {...register("activityName")} className="form-control" placeholder="Your Activity Name" />
+                                {errors?.activityName?.message && <p>{errors?.activityName?.message}</p>}
                             </div>
                             <div className="mb-4">
-                                <LabelName id="activity-type" name="Activity Type"/>
-                                <select className="form-select" id="activity-type" required>
-                                    <option value="" className="d-none">Choose Your Activity</option>
-                                    <option value="1">running</option>
-                                    <option value="2">swimming</option>
-                                    <option value="3">basketball</option>
-                                    <option value="4">biking</option>
-                                    <option value="5">weight training</option>
-                                    <option value="6">ping pong</option>
-                                    <option value="7">boxing</option>
-                                    <option value="8">tennis</option>
-                                    <option value="9">yoga</option>
-                                    <option value="10">soccer</option>
-                                    <option value="11">golf</option>
-                                    <option value="12">other</option>
-                                </select>
+                                <LabelName name="Date"/>
+                                <input {...register("activityDate")} type="date" className="form-control" required/>
+                            </div>
+                            <div className="mb-4">
+                                <LabelName name="Activity Type"/>
+                                <Select 
+                                onChange={handleTypeSelect}
+                                value={options.filter(function(option) {
+                                    return option.value === selectedOption;
+                                  })}
+                                options={options} 
+                                required 
+                                styles={colourStyles}/>
 
-
+                             
                                 </div>
                                 <div className="mb-4">
                                     <LabelName id="form-duration" name="Activity Duration"/>
@@ -70,12 +109,14 @@ const ActivityForm = () => {
                                 </div>
                                 <div className="mt-5 mb-4">
                                     <LabelName id="form-desc" name="Describe this journal"/>
-                                    <textarea maxLength={120}
+                                    <textarea {...register("description")}
+                                    maxLength={120}
                                     type="text" 
                                     className="form-control" 
                                     id="form-desc" 
                                     placeholder="Max 120 Characters"
-                                    ></textarea>
+                                    />
+                                    {errors?.description?.message && <p>{errors?.description?.message}</p>}
 
                                 </div>
                                 <div className="add-activity-btn">
@@ -93,6 +134,8 @@ const ActivityForm = () => {
 
         </section>
     );   
+
+  
 };
 
 

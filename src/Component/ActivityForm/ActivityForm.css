@@ -1,8 +1,8 @@
 
 p {
   color: #bf1650;
+  margin-top: 3px;
 }
-
 
 p::before {
   display: inline;
