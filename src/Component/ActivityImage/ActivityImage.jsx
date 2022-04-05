@@ -1,12 +1,13 @@
 import './ActivityImage.css'
 import ImageGallery from '../../assets/images/imageIndex'
 
-const ActivityImage = () => {
+const ActivityImage = (props) => {
         
+
     return (
         <div className="container-fluid d-none d-md-block">
         <div className="row row-cols-4 row-cols-lg-6 px-3 py-3">
-            <div className="col d-flex justify-content-center mb-3"><img className ="activity-img img-fluid" src={ImageGallery.running}
+            <div className="col d-flex justify-content-center mb-3"><img onClick={props.onClick} className ="activity-img img-fluid" src={ImageGallery.running}
                     alt="running"/></div>
             <div className="col d-flex justify-content-center mb-3"><img className ="activity-img img-fluid" src={ImageGallery.swimming}
                     alt="running"/></div>
