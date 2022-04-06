@@ -16,7 +16,7 @@ ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>
          <Routes>
-           <Route path="exernotion" element={<AddActivity/>} />
+           <Route path="exernotion/" element={<AddActivity/>} />
            <Route path="exernotion/activity-history" element={<ActivityHistory/>}/>
          </Routes>
       </BrowserRouter>

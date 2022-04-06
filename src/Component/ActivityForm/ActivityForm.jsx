@@ -75,11 +75,13 @@ const ActivityForm = () => {
                         <div className="col-md-6 py-3 pe-5">
                             {/* form section */}
                             <form onSubmit={handleSubmit(onSubmitData, onError)}>
+                                
                                 <LabelName id="form-activity" name="Activity Name" />
                                 <input {...register("activityName")} className="form-control form-custom" placeholder="Your Activity Name" />
                                 <Fade bottom collapse>
                                     {errors?.activityName?.message && <p>{errors?.activityName?.message}</p>}
                                 </Fade>
+
                                 <LabelName name="Date" />
                                 <input {...register("activityDate")} type="date" className="form-control form-custom" required />
 
@@ -97,15 +99,18 @@ const ActivityForm = () => {
                                         />
                                     )}
                                 />
+
                                 <LabelName name="Activity Duration" />
                                 <input {...register("activityDuration")} className="form-control form-custom" placeholder="Hours" required />
                                 <Fade>{errors?.activityDuration?.message && <p>{errors?.activityDuration?.message}</p>}</Fade>
+                                
                                 <LabelName name="Describe this journal" />
                                 <textarea {...register("activityDescription")}
                                     className="form-control form-custom"
                                     placeholder="Max 120 Characters"
                                 />
                                 <Fade>{errors?.activityDescription?.message && <p>{errors?.activityDescription?.message}</p>}</Fade>
+
                                 <div className="add-activity-btn">
                                     <button type="submit" className="btn btn-dark fw-bold py-2 border">ADD ACTIVITY</button>
                                 </div>
