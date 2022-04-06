@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import ImageGallery from "../../assets/images/imageIndex";
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -7,7 +7,7 @@ import './ActivityForm.css'
 import ActivityImage from "../ActivityImage/ActivityImage";
 import Select from 'react-select'
 import chroma from 'chroma-js';
-import { Fade,Reveal } from "react-awesome-reveal";
+import { Fade } from "react-awesome-reveal";
 
 
 const ActivityForm = () => {
@@ -77,7 +77,7 @@ const ActivityForm = () => {
                             <form onSubmit={handleSubmit(onSubmitData, onError)}>
                                 <LabelName id="form-activity" name="Activity Name" />
                                 <input {...register("activityName")} className="form-control form-custom" placeholder="Your Activity Name" />
-                                <Fade>
+                                <Fade bottom collapse>
                                     {errors?.activityName?.message && <p>{errors?.activityName?.message}</p>}
                                 </Fade>
                                 <LabelName name="Date" />

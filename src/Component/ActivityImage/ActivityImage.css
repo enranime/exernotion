@@ -12,14 +12,13 @@
 
 .activity-img {
     width: 150px;
-    
     /* -webkit-filter: drop-shadow(5px 5px 5px 
     #06c258 );
     filter: drop-shadow(5px 5px 5px 
     #06c258 ); */
   }
 
-  .activity-img:hover {
+.activity-img:hover {
     max-width: 150px;
     transition: 0.5s;
     transform: translate(0,-10px);
@@ -27,8 +26,9 @@
     #06c258 );
     filter: drop-shadow(5px 5px 5px 
     #06c258 );
+    cursor: pointer;
     
-  }
+}
 
 .img-form{
     border: 12px solid white;
