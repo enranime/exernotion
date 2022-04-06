@@ -1,3 +1,4 @@
+
 .img-history{
     width: 100%;
     padding:12px ;
@@ -27,4 +28,11 @@
 .card-body h5{
     font-size: calc(12px +1vw);
    
+}
+
+.pagination{
+    width: 100%;
+    display:flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
 }

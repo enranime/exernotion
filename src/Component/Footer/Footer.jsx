@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <section id="footer-section">
         {/* <!-- footer section --> */}
-        <div className="container-fluid p-footer">
+        <div className="container-fluid">
             <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 pe-3 border-top">
                 <div className="col-md-4 d-flex align-items-center">
                     <span className="text-light">&copy;Copyright 2019</span>
