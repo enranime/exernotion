@@ -7,7 +7,7 @@ const Navbar = () => {
     return (
     <nav className="navbar navbar-expand-lg navbar-light border-bottom">
         <div className="container-fluid pe-1">
-            <a className="navbar-brand p-logo fw-bold animated_test1" href="./index.html"><span className="Exer animated_test2">Exer</span>Notion</a>
+            <Link to='/exernotion/index' className="navbar-brand p-logo fw-bold animated_test1"><span className="Exer animated_test2">Exer</span>Notion</Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                 aria-label="Toggle navigation">

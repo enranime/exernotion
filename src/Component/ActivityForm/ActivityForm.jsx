@@ -8,13 +8,63 @@ import ActivityImage from "../ActivityImage/ActivityImage";
 import Select from 'react-select'
 import chroma from 'chroma-js';
 import { Fade } from "react-awesome-reveal";
+import { format } from "date-fns";
+const axios = require('axios').default;
 
+const run = async (data) => {
+    const client = axios.create({
+        baseURL: 'http://localhost:4000',
+    });
+
+    // const res = await client.get('/users/me/records');
+
+    // console.log(res.status);
+    // console.log(res.statusText);
+    // console.log(res.data);
+
+    // const postData = await client.post('/users/me/records',data);
+    // const d2 = new Date(data.activityDate).toDateString;
+   
+   
+    const d1 = format(data.activityDate, "MMMM do, yyyy")
+    console.log(d1);
+
+    const sendData = {
+        activityName: data.activityName,
+        activityDate: d1,
+        activityDuration: data.activityDuration,
+        activityType:data.activityType.label,
+        activityDescription: data.activityDescription,
+    }
+
+    console.log(sendData);
+    // console.log(`Post response status ${postData.status}`)
+
+    
+    const postResponse = await client.post('/users/me/records',sendData);
+    if(postResponse.status === 201) {
+        alert("Record submit successful!")
+    } else{
+        alert(`error code ${postResponse.statusText}`)
+    }
+    // console.log(`Post response status ${postResponse.status}`);
+    // console.log(postResponse.data);
+
+    // // GET /users/me/records?activityName=Walking
+
+    // const getRes = await client.get('/users/me/records', { params: { activityName: 'Walking' } });
+
+    // console.log(getRes.status);
+};
+
+
+
+const onSubmitData = (run) ;
 
 const ActivityForm = () => {
 
-    // submit data
-    const onSubmitData = (data) => alert(JSON.stringify(data));
-
+  
+  
     // selected option
     const options = [
         { value: 'running', label: 'Running' },
@@ -77,13 +127,13 @@ const ActivityForm = () => {
                             <form onSubmit={handleSubmit(onSubmitData, onError)}>
                                 
                                 <LabelName id="form-activity" name="Activity Name" />
-                                <input {...register("activityName")} className="form-control form-custom" placeholder="Your Activity Name" />
+                                <input {...register("activityName")} className="form-control form-custom" placeholder="Your Activity Name"  />
                                 <Fade bottom collapse>
                                     {errors?.activityName?.message && <p>{errors?.activityName?.message}</p>}
                                 </Fade>
 
                                 <LabelName name="Date" />
-                                <input {...register("activityDate")} type="date" className="form-control form-custom" required />
+                                <input {...register("activityDate")} type="date" className="form-control form-custom"  required />
 
                                 <LabelName name="Activity Type" />
                                 <Controller

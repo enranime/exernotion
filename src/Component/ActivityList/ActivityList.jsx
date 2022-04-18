@@ -2,98 +2,77 @@ import ActivityCard from '../ActivityCard/ActivityCard'
 import './ActivityList.css'
 import { useState,useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
+import axios from 'axios';
+
+const client = axios.create({
+    baseURL: 'http://localhost:4000',
+});
+
 
 const ActivityList = () => {
-
-
-    const mockData =[
-        {   
-            id:"1",
-            date:"00/00/0000",
-            activityName:"Running",
-            duration:1,
-            type:"Running",
-            description:"description1"
-        },
-        {   
-            id:"2",
-            date:"01/00/0000",
-            activityName:"Walking",
-            duration:2,
-            type:"Walking",
-            description:"description2"
-        },
-         {
-            id:"3",
-            date:"02/00/0000",
-            activityName:"Swmiming",
-            duration:3,
-            type:"Swmiming",
-            description:"description3"
-        },
-
-        {
-            id:"4",
-            date:"03/00/0000",
-            activityName:"Yoga",
-            duration:4,
-            type:"Yoga",
-            description:"description4"
-        },
-        {   
-            id:"5",
-            date:"00/00/0000",
-            activityName:"Running",
-            duration:1,
-            type:"Running",
-            description:"description1"
-        },
-        {   
-            id:"6",
-            date:"01/00/0000",
-            activityName:"Walking",
-            duration:2,
-            type:"Walking",
-            description:"description2"
-        },
-         {
-            id:"7",
-            date:"02/00/0000",
-            activityName:"Swmiming",
-            duration:3,
-            type:"Swmiming",
-            description:"description3"
-        },
-
-        {
-            id:"8",
-            date:"03/00/0000",
-            activityName:"Yoga",
-            duration:8,
-            type:"Yoga",
-            description:"description4"
-        }
     
-    ];
+    const [mockData,setMockData] = useState([]);
+
+    const fetchData = async () => {
+        const res  = await client.get('/users/me/records');
+        setMockData(res.data);
+    }
+
+
+    const removeItem = (uri) => {
+        const deleteData = client.delete(uri)
+        .then(()=>{
+            console.log('delete success')
+            fetchData();
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+    }
+    
+    const editItem = (uri,params) => {
+        const editData = client.put(uri,params)
+        .then(()=>{
+            console.log('edit success')
+            fetchData();
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+    }
+
+    useEffect(() => {
+        
+        fetchData()
+        .then(()=> {
+            console.log("pulling data success")
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        
+    }, [])
 
     const TestArray = ({currentItems}) => {
         const test = currentItems.map((data) =>{
         return (
         <ActivityCard
-            key={data.id}
-            date={data.date} 
+            id={data._id}
+            key={data._id}
+            date={data.activityDate} 
             ActivityName={data.activityName}
-            duration={data.duration} 
-            type={data.type}
-            description={data.description}
+            duration={data.activityDuration} 
+            type={data.activityType}
+            description={data.activityDescription}
+            removeItem = {removeItem}
+            editItem = {editItem}
         />
             )}
         );
 
         return test;
     };
-
- 
+    
 
     const PaginatedItems = ({itemsPerPage}) =>{
 
@@ -103,17 +82,16 @@ const ActivityList = () => {
 
         useEffect(()=> {
             const endOffset = itemOffset + itemsPerPage;
-            console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+            // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
             setCurrentItems(mockData.slice(itemOffset, endOffset));
-            let currentArray = currentItems;
             setPageCount(Math.ceil(mockData.length / itemsPerPage));
           }, [itemOffset, itemsPerPage]);
 
         const handlePageClick = (event) => {
             const newOffset = (event.selected * itemsPerPage) % mockData.length;
-            console.log(
-                `User requested page number ${event.selected}, which is offset ${newOffset}`
-              );
+            // console.log(
+            //     `User requested page number ${event.selected}, which is offset ${newOffset}`
+            //   );
             setItemOffset(newOffset);
         }
 
