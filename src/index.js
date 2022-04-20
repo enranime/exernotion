@@ -5,7 +5,7 @@ import AddActivity from './Page/AddActivity';
 import ActivityHistory from './Page/ActivityHistory';
 import Footer from "./Component/Footer/Footer"
 import Navbar from "./Component/Navbar/Navbar"
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {
   BrowserRouter,
