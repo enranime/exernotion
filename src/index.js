@@ -15,7 +15,7 @@ import {
 
 
 ReactDOM.render(
-  <React.StrictMode>
+
       <BrowserRouter>
       <Navbar/>
          <Routes>
@@ -24,7 +24,7 @@ ReactDOM.render(
          </Routes>
          <Footer/>
       </BrowserRouter>
-  </React.StrictMode>,
+  ,
   document.getElementById('root')
 );
 
