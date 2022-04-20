@@ -4,7 +4,6 @@ import Bike from './bike (1).png';
 import Boxing from './boxing-gloves (1).png';
 import Dumbbell from './dumbbell (1).png';
 import Golf from './golf (1).png';
-import Other from './other.png';
 import Pingpong from './ping-pong (1).png';
 import Soccer  from './soccer-ball (1).png';
 import Swimming  from './swimming (1).png';
