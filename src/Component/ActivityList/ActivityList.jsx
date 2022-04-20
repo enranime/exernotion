@@ -5,7 +5,7 @@ import ReactPaginate from 'react-paginate';
 import axios from 'axios';
 
 const client = axios.create({
-    baseURL: 'https://exornation-backend.vercel.app/',
+    baseURL: 'http://localhost:4001',
 });
 
 
@@ -130,9 +130,7 @@ const ActivityList = () => {
                 <span className="fw-bold">Activity History</span>
                 <div>
                     <span>
-                        <a href="#" className="fw-bold" target="_blank">All
-                            <i className="fa fa-chevron-right"></i>
-                        </a>
+                        
                     </span>
                 </div>
             </div>
