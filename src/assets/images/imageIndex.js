@@ -10,6 +10,7 @@ import Swimming  from './swimming (1).png';
 import Tennis  from './tennis (1).png';
 import Volleyball  from './volleyball (1).png';
 import Yoga  from './yoga (1).png';
+import Other from './other.png';
 
 const ImageGallery = {
      running : Running,
@@ -25,6 +26,7 @@ const ImageGallery = {
      tennis : Tennis,
      volleyball : Volleyball,
      yoga : Yoga,
+     other: Other,
 }
 
 export  default ImageGallery;
