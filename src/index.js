@@ -16,14 +16,15 @@ import {
 
 ReactDOM.render(
 
-      <BrowserRouter>
-      <Navbar/>
-         <Routes>
-           <Route path="exernotion/" element={<AddActivity/>} />
-           <Route path="exernotion/activity-history" element={<ActivityHistory/>}/>
-         </Routes>
-         <Footer/>
-      </BrowserRouter>
+      // <BrowserRouter>
+      // <Navbar/>
+      //    <Routes>
+      //      <Route path="exernotion/" element={<AddActivity/>} />
+      //      <Route path="exernotion/activity-history" element={<ActivityHistory/>}/>
+      //    </Routes>
+      //    <Footer/>
+      // </BrowserRouter>
+      <h1>helloworld</h1>
   ,
   document.getElementById('root')
 );
