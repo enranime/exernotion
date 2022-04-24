@@ -1,20 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import AddActivity from './Page/AddActivity';
 import ActivityHistory from './Page/ActivityHistory';
 import Footer from "./Component/Footer/Footer"
 import Navbar from "./Component/Navbar/Navbar"
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// import {
+//   BrowserRouter,
+//   Routes,
+//   Route,
+// } from "react-router-dom";
 
 
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
-
-
-ReactDOM.render(
+root.render(
 
       // <BrowserRouter>
       // <Navbar/>
@@ -25,8 +25,6 @@ ReactDOM.render(
       //    <Footer/>
       // </BrowserRouter>
       <h1>helloworld</h1>
-  ,
-  document.getElementById('root')
 );
 
 
