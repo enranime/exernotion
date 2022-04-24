@@ -5,7 +5,7 @@ import ReactPaginate from 'react-paginate';
 import axios from 'axios';
 
 const client = axios.create({
-    baseURL: 'http://localhost:4001',
+    baseURL: 'http://localhost:4001/',
 });
 
 
@@ -20,7 +20,7 @@ const ActivityList = () => {
 
 
     const removeItem = (uri) => {
-        const deleteData = client.delete(uri)
+         client.delete(uri)
         .then(()=>{
             console.log('delete success')
             fetchData();
@@ -31,7 +31,7 @@ const ActivityList = () => {
     }
     
     const editItem = (uri,params) => {
-        const editData = client.put(uri,params)
+        client.put(uri,params)
         .then(()=>{
             console.log('edit success')
             fetchData();
