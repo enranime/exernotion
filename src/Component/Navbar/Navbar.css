@@ -1,0 +1,42 @@
+.navbar-light .navbar-brand{
+    color:white;
+}
+
+.Exer{
+    color:#f4eb49;
+}
+
+.navbar-light .navbar-brand:hover .Exer{
+    color:#06c258;
+    
+
+}
+
+
+.p-activity > h2{
+    padding: 12px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top:12px;
+}
+
+
+.p-navtext{
+    font-size: 18px;
+    align-self: center;
+    margin-left: 36px;
+}
+
+.p-navtext:hover{
+    transform: scale(1.2);
+    transition:0.5s;
+    
+}
+
+
+
+.p-logo{
+    font-size: 42px;
+    box-sizing: border-box;
+    
+}
