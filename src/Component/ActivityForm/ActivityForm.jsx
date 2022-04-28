@@ -9,7 +9,27 @@ import Select from 'react-select'
 import chroma from 'chroma-js';
 import { Fade } from "react-awesome-reveal";
 import { format } from "date-fns";
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+
+
 const axios = require('axios').default;
+
+const Input = styled('input')({
+    display: 'none',
+  });
+
+const PhotoCameraL = styled(PhotoCamera)`
+
+    :hover{
+        color:black;
+    }
+    width:5rem;
+    height:5rem;
+
+`;
 
 const run = async (data) => {
     const client = axios.create({
@@ -24,8 +44,9 @@ const run = async (data) => {
 
     // const postData = await client.post('/users/me/records',data);
     // const d2 = new Date(data.activityDate).toDateString;
-   
-   
+
+    
+
     const d1 = format(data.activityDate, "MMMM do, yyyy")
     console.log(d1);
 
@@ -33,18 +54,18 @@ const run = async (data) => {
         activityName: data.activityName,
         activityDate: d1,
         activityDuration: data.activityDuration,
-        activityType:data.activityType.label,
+        activityType: data.activityType.label,
         activityDescription: data.activityDescription,
     }
 
     console.log(sendData);
     // console.log(`Post response status ${postData.status}`)
 
-    
-    const postResponse = await client.post('/users/me/records',sendData);
-    if(postResponse.status === 201) {
+
+    const postResponse = await client.post('/users/me/records', sendData);
+    if (postResponse.status === 201) {
         alert("Record submit successful!")
-    } else{
+    } else {
         alert(`error code ${postResponse.statusText}`)
     }
     // console.log(`Post response status ${postResponse.status}`);
@@ -59,12 +80,12 @@ const run = async (data) => {
 
 
 
-const onSubmitData = (run) ;
+const onSubmitData = (run);
 
 const ActivityForm = () => {
 
-  
-  
+
+
     // selected option
     const options = [
         { value: 'running', label: 'Running' },
@@ -113,65 +134,75 @@ const ActivityForm = () => {
         const name = event.target.getAttribute('fname');
         console.log(value);
         console.log(name);
-        setValue("activityType",{label:name,value:value});
+        setValue("activityType", { label: name, value: value });
     }
 
     return (
         <>
-                <h2 className="mt-3">Add your Activity</h2>
-                <ActivityImage onClick={handleClickImage}/>
-                <div className="container my-5">
-                    <div className="row">
-                        <div className="col-md-6 py-3 pe-5">
-                            {/* form section */}
-                            <form onSubmit={handleSubmit(onSubmitData, onError)}>
-                                
-                                <LabelName id="form-activity" name="Activity Name" />
-                                <input {...register("activityName")} className="form-control form-custom" placeholder="Your Activity Name"  />
-                                <Fade bottom collapse>
-                                    {errors?.activityName?.message && <p>{errors?.activityName?.message}</p>}
-                                </Fade>
+            <h2 className="mt-3">Add your Activity</h2>
+            <ActivityImage onClick={handleClickImage} />
+            <div className="container my-5">
+                <div className="row">
+                    <div className="col-md-6 py-3 pe-5">
+                        {/* form section */}
+                        <form onSubmit={handleSubmit(onSubmitData, onError)}>
 
-                                <LabelName name="Date" />
-                                <input {...register("activityDate")} type="date" className="form-control form-custom"  required />
+                            <LabelName id="form-activity" name="Activity Name" />
+                            <input {...register("activityName")} className="form-control form-custom" placeholder="Your Activity Name" />
+                            <Fade bottom collapse>
+                                {errors?.activityName?.message && <p>{errors?.activityName?.message}</p>}
+                            </Fade>
 
-                                <LabelName name="Activity Type" />
-                                <Controller
-                                    name="activityType"
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field }) => (
-                                        <Select {...field}
-                                            options={options}
-                                            placeholder={"Select Activity Type"}
-                                            styles={colourStyles}
-                                            className="form-custom"
-                                        />
-                                    )}
-                                />
+                            <LabelName name="Date" />
+                            <input {...register("activityDate")} type="date" className="form-control form-custom" required />
 
-                                <LabelName name="Activity Duration" />
-                                <input {...register("activityDuration")} className="form-control form-custom" placeholder="Hours" required />
-                                <Fade>{errors?.activityDuration?.message && <p>{errors?.activityDuration?.message}</p>}</Fade>
-                                
-                                <LabelName name="Describe this journal" />
-                                <textarea {...register("activityDescription")}
-                                    className="form-control form-custom"
-                                    placeholder="Max 120 Characters"
-                                />
-                                <Fade>{errors?.activityDescription?.message && <p>{errors?.activityDescription?.message}</p>}</Fade>
+                            <LabelName name="Activity Type" />
+                            <Controller
+                                name="activityType"
+                                control={control}
+                                defaultValue=""
+                                render={({ field }) => (
+                                    <Select {...field}
+                                        options={options}
+                                        placeholder={"Select Activity Type"}
+                                        styles={colourStyles}
+                                        className="form-custom"
+                                    />
+                                )}
+                            />
 
-                                <div className="add-activity-btn">
-                                    <button type="submit" className="btn btn-dark fw-bold py-2 border">ADD ACTIVITY</button>
-                                </div>
-                            </form>
+                            <LabelName name="Activity Duration" />
+                            <input {...register("activityDuration")} className="form-control form-custom" placeholder="Hours" required />
+                            <Fade>{errors?.activityDuration?.message && <p>{errors?.activityDuration?.message}</p>}</Fade>
 
-                        </div>
-                        <div className="col-md-6 d-flex align-items-center justify-content-center">
-                            <img className="img-form img-fluid d-none d-md-block img-fluid" src={ImageGallery.running} width="520px" alt="placeholder" />
-                        </div>
+                            <LabelName name="Describe this journal" />
+                            <textarea {...register("activityDescription")}
+                                className="form-control form-custom"
+                                placeholder="Max 120 Characters"
+                            />
+                            <Fade>{errors?.activityDescription?.message && <p>{errors?.activityDescription?.message}</p>}</Fade>
+
+                            <div className="add-activity-btn">
+                                <button type="submit" className="btn btn-dark fw-bold py-2 border">ADD ACTIVITY</button>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div className="col-md-6 d-flex align-items-center justify-content-center">
+                        {/* <img className="img-form img-fluid d-none d-md-block img-fluid" src={ImageGallery.running} width="520px" alt="placeholder" /> */}
+                        <Box sx={{width:520,height:520}} className="img-form img-fluid d-none d-md-block img-fluid" alt="placeholder" >
+                        <label htmlFor="icon-button-file" >
+                            <Input accept="image/*" id="icon-button-file" type="file" />
+                            <IconButton aria-label="upload picture" class="center" component="span">
+                                <PhotoCameraL/>
+                            </IconButton>
+                        </label>
+                        </Box>
+                        
+
                     </div>
                 </div>
+            </div>
         </>
     )
 }
