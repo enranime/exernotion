@@ -13,7 +13,7 @@ const axios = require('axios').default;
 
 const run = async (data) => {
     const client = axios.create({
-        baseURL: 'http://localhost:4001/',
+        baseURL: 'https://exornation-backend.vercel.app/',
     });
 
     // const res = await client.get('/users/me/records');
