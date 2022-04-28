@@ -70,7 +70,7 @@ export default function ConfirmEdit(props) {
 
     return (
         <div>
-            <Button variant='contained' color='info'  onClick={handleClickOpen}>Edit</Button>
+            <Button variant='contained' color='info' onClick={handleClickOpen}>Edit</Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
