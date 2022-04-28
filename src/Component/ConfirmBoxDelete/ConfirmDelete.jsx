@@ -2,8 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
+import DeleteIcon from '@mui/icons-material/Delete';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
@@ -34,7 +33,7 @@ export default function ConfirmDelete(props) {
   const handleDelete = async () => {
     const activityId = props.properties.id;
     const uri = "/users/me/records/" + activityId 
-    const deleteItem = await props.properties.removeItem(uri);
+    await props.properties.removeItem(uri);
     setOpen(false);
   
   }
@@ -45,7 +44,7 @@ export default function ConfirmDelete(props) {
         {/* <Button variant="outlined" onClick={handleClickOpen}>
         Slide in alert dialog
       </Button> */}
-      <button type="button" className="btn btn-danger" onClick={handleClickOpen}>Delete</button>
+      <Button variant='contained' color='error' startIcon={<DeleteIcon/>} onClick={handleClickOpen}>Delete</Button>
       <Dialog
         open={open}
         TransitionComponent={Transition}
