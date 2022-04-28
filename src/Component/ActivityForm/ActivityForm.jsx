@@ -13,6 +13,8 @@ import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import ReactDOM from "react-dom";
+import Button from '@mui/material/Button';
 
 
 const axios = require('axios').default;
@@ -79,6 +81,16 @@ const run = async (data) => {
 };
 
 
+const loadFile = (e) => {
+    let image = document.getElementById('profile-image');
+    console.log(e.target.files);
+    image.src = URL.createObjectURL(e.target.files[0]);
+}
+
+const removeImage = (e) => {
+    let image = document.getElementById('profile-image');
+    image.src = "";
+}
 
 const onSubmitData = (run);
 
@@ -188,15 +200,19 @@ const ActivityForm = () => {
                         </form>
 
                     </div>
-                    <div className="col-md-6 d-flex align-items-center justify-content-center">
+                    <div className="col-md-6 d-flex align-items-center justify-content-center" >
+
                         {/* <img className="img-form img-fluid d-none d-md-block img-fluid" src={ImageGallery.running} width="520px" alt="placeholder" /> */}
+
                         <Box sx={{width:520,height:520}} className="img-form img-fluid d-none d-md-block img-fluid" alt="placeholder" >
-                        <label htmlFor="icon-button-file" >
-                            <Input accept="image/*" id="icon-button-file" type="file" />
-                            <IconButton aria-label="upload picture" class="center" component="span">
-                                <PhotoCameraL/>
+                        <Button sx={{width:20,position:"absolute",right:30}} variant="contained" color="error" onClick={removeImage}>x</Button>
+                        <label htmlFor="icon-button-file"  className="center" >
+                            <Input accept="image/*" id="icon-button-file" type="file" onChange={loadFile}/>
+                            <IconButton aria-label="upload picture" component="span">
+                                <PhotoCameraL id="photo-icon"/>
                             </IconButton>
                         </label>
+                        <img id="profile-image"/>
                         </Box>
                         
 

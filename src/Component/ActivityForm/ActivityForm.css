@@ -69,3 +69,9 @@ p {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+#profile-image{
+  width: 420px;
+  max-height: 420px;
+}
+
