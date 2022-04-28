@@ -17,13 +17,13 @@ const Navbar = () => {
                 <div className="navbar-nav pe-3">
 
                     <Link 
-                        to="/exernotion"
+                        to="/"
                         className="nav-link text-light fw-bold p-navtext" >
                         Add your Activity
                     </Link>
 
                     <Link 
-                        to='/exernotion/activity-history' 
+                        to='/activity-history' 
                         className="nav-link text-light fw-bold p-navtext">
                         Activity History
                     </Link>
