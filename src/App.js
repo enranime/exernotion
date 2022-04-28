@@ -21,7 +21,7 @@ function App() {
            <Route path="exernotion/" element={<AddActivity/>} />
            <Route path="exernotion/activity-history" element={<ActivityHistory/>}/>
           </Routes>
-      /  <Footer/>
+        <Footer/>
        </BrowserRouter>
   );
 }
