@@ -18,8 +18,8 @@ function App() {
     <BrowserRouter>
        <Navbar/>
          <Routes>
-           <Route path="exernotion/" element={<AddActivity/>} />
-           <Route path="exernotion/activity-history" element={<ActivityHistory/>}/>
+           <Route path="/" element={<AddActivity/>} />
+           <Route path="/activity-history" element={<ActivityHistory/>}/>
           </Routes>
         <Footer/>
        </BrowserRouter>
